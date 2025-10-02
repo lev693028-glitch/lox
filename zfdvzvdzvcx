@@ -1,0 +1,19 @@
+def safe_calculator(func):
+    def wrapper(expression):
+        try:
+            result = func(expression)
+            return result
+        except ZeroDivisionError:
+            return "Помилка: ділення на нуль"
+        except SyntaxError:
+            return "Помилка: неправильний вираз"
+        except NameError:
+            return "Помилка: невідомий символ"
+        except Exception as e:
+            return f"Помилка: {str(e)}"
+    return wrapper
+
+
+@safe_calculator
+def calculate(expression):
+    return eval(expression)
